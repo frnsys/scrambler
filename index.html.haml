@@ -1,0 +1,17 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %title inspiration
+    :css
+      body {
+        padding:2em;
+      }
+      img {
+        float:left;
+        max-width:100%;
+        max-height:800px;
+      }
+  %body
+    - filenames.each do |filename|
+      %img{:src => filename}
