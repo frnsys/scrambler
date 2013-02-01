@@ -16,3 +16,27 @@
   %body
     - filenames.each do |filename|
       %img{:src => filename}
+
+  :javascript
+    window.scrolling = false;
+    window.addEventListener("keydown", function(ev) {
+      ev.preventDefault();
+      if (ev.keyCode == 32) {
+        if (!window.scrolling) {
+          window.scrolling = true;
+          windowScroll( document.documentElement.scrollHeight, 100 );
+        } else {
+          window.scrolling = false;
+          for (var i=0; i<window.timeouts.length; i++) {
+            clearTimeout(window.timeouts[i]);
+          }
+        }
+      }
+      return false;
+    });
+    function windowScroll(y, speed) {
+      window.timeouts = [];
+      for (var i=0; i<y; i++) {
+        window.timeouts.push( setTimeout("window.scrollBy(0," + i + ")", speed * i) );
+      }
+    }
