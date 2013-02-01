@@ -11,13 +11,17 @@ and dumps out an html file for viewing them.
 require "rubygems"
 require "haml"
 
-INSPIRPATH = "~/Pictures/inspir/"
 IGNORE = [ ".", "..", ".DS_Store" ]
+
+inspirpath = ARGV[0] ? ARGV[0] : "~/Pictures/inspir/"
+outputFile = ARGV[1] ? ARGV[1] : "index.html"
+
 engine = Haml::Engine.new(File.read("index.html.haml"))
-html = File.new("index.html", "w")
+html = File.new(outputFile, "w")
 
 # Switch to proper dir
-Dir.chdir(File.expand_path(INSPIRPATH))
+Dir.chdir(File.expand_path(inspirpath))
+
 
 def scan(path)
 	filenames = Array.new
